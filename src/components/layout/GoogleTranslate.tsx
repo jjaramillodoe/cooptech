@@ -15,6 +15,7 @@ export const LANGUAGES = [
   { value: 'da', google: 'da', label: 'Dansk (Danish)' },
   { value: 'nl', google: 'nl', label: 'Nederlands (Dutch)' },
   { value: 'en', google: 'en', label: 'English' },
+  { value: 'es', google: 'es', label: 'Español (Spanish)' },
   { value: 'fi', google: 'fi', label: 'Suomi (Finnish)' },
   { value: 'fr', google: 'fr', label: 'Français (French)' },
   { value: 'de', google: 'de', label: 'Deutsch (German)' },

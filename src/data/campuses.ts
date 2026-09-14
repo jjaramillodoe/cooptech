@@ -1,0 +1,58 @@
+import type { Campus } from '@/types/content'
+
+export const campuses: Campus[] = [
+  {
+    id: 'main',
+    name: 'Coop Tech Main Campus',
+    address: '321 East 96th Street, New York, NY 10128',
+    phone: '212-369-8800',
+    borough: 'Manhattan',
+    lat: 40.783632,
+    lng: -73.944983,
+  },
+  {
+    id: 'longwood',
+    name: 'Coop Tech @ Longwood Campus',
+    address: '965 Longwood Avenue, Bronx, NY 10459',
+    phone: '718-589-2531 ext. 5090',
+    borough: 'Bronx',
+    lat: 40.81764,
+    lng: -73.897956,
+  },
+  {
+    id: 'lic',
+    name: 'Coop Tech @ Long Island City H.S.',
+    address: '14-30 Broadway, Queens, NY 11106',
+    phone: '718-545-7095',
+    borough: 'Queens',
+    lat: 40.765589,
+    lng: -73.93262,
+  },
+  {
+    id: 'qtc',
+    name: 'Coop Tech @ Queens Transitional Center',
+    address: '142-10 Linden Boulevard, Queens, NY 11436',
+    phone: '718-558-2060',
+    borough: 'Queens',
+    lat: 40.684036,
+    lng: -73.801149,
+  },
+  {
+    id: 'concord',
+    name: 'Coop Tech @ Concord H.S.',
+    address: '109 Rhine Avenue, Staten Island, NY 10304',
+    phone: '718-447-1274',
+    borough: 'Staten Island',
+    lat: 40.61096,
+    lng: -74.08699,
+  },
+  {
+    id: 'canarsie',
+    name: 'Coop Tech @ Canarsie H.S.',
+    address: '1600 Rockaway Parkway, Brooklyn, NY 11236',
+    phone: '718-290-8600',
+    borough: 'Brooklyn',
+    lat: 40.640853,
+    lng: -73.898392,
+  },
+]

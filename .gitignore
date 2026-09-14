@@ -1,0 +1,56 @@
+# dependencies
+node_modules
+.pnp
+.pnp.*
+.pnpm-store
+
+# next.js / build output
+.next
+out
+dist
+build
+.turbo
+
+# vercel
+.vercel
+
+# env and secrets — keep .env.example committable
+.env
+.env.*
+!.env.example
+*.pem
+
+# npm lockfile (this repo uses pnpm)
+package-lock.json
+
+# generated types
+*.tsbuildinfo
+next-env.d.ts
+src/payload-types.ts
+payload-types.ts
+
+# payload local uploads (when Blob is not used)
+/media
+
+# capture / screenshot output
+scripts/output
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# tests
+coverage
+playwright-report
+test-results
+blob-report
+playwright/.cache
+
+# os / editor
+.DS_Store
+Thumbs.db
+.idea
+*.swp

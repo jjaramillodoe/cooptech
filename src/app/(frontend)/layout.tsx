@@ -10,6 +10,7 @@ import { ScrollToTop } from '@/components/layout/ScrollToTop'
 import { Providers } from '@/components/providers/Providers'
 import { getBanner, getNavigation } from '@/lib/cms'
 import { siteUrl } from '@/lib/env'
+import { Analytics } from '@vercel/analytics/react'
 
 import './globals.css'
 
@@ -73,6 +74,7 @@ export default async function FrontendLayout({ children }: { children: React.Rea
   return (
     <html lang="en" className={sans.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="min-h-screen w-full bg-white font-sans antialiased" suppressHydrationWarning>
+        <Analytics />
         <Providers>
           <a href="#main-content" className="skip-link">
             Skip to main content

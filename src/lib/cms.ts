@@ -18,7 +18,10 @@ import type {
   CTABannerBlockData,
   HeroBlockData,
   ImageTextGridBlockData,
+  FooterColumn,
   LayoutBlock,
+  NavChild,
+  NavItem,
   NavigationData,
   PageData,
   Program,
@@ -27,9 +30,30 @@ import type {
 } from '@/types/content'
 import type { StaffCategory, StaffMember } from '@/types/staff'
 
+type CmsNavLink = {
+  label?: string | null
+  href?: string | null
+}
+
+type CmsNavItem = CmsNavLink & {
+  children?: CmsNavLink[] | null
+}
+
+type CmsFooterColumn = {
+  heading?: string | null
+  links?: CmsNavLink[] | null
+}
+
 async function getCms() {
   const { default: config } = await import('@payload-config')
   return getPayload({ config })
+}
+
+function mapNavLink(link: CmsNavLink): NavChild {
+  return {
+    label: link.label || '',
+    href: link.href || '/',
+  }
 }
 
 function mapMeta(
@@ -282,24 +306,17 @@ export async function getNavigation(): Promise<NavigationData> {
       slug: 'navigation',
       depth: 1,
     })
-    const header = Array.isArray(nav.header)
-      ? nav.header.map((item) => ({
+    const header: NavItem[] = Array.isArray(nav.header)
+      ? nav.header.map((item: CmsNavItem) => ({
           label: item.label || '',
           href: item.href || '/',
-          children: item.children?.map((child) => ({
-            label: child.label || '',
-            href: child.href || '/',
-          })),
+          children: item.children?.map(mapNavLink),
         }))
       : []
-    const footer = Array.isArray(nav.footer)
-      ? nav.footer.map((column) => ({
+    const footer: FooterColumn[] = Array.isArray(nav.footer)
+      ? nav.footer.map((column: CmsFooterColumn) => ({
           heading: column.heading || '',
-          links:
-            column.links?.map((link) => ({
-              label: link.label || '',
-              href: link.href || '/',
-            })) || [],
+          links: column.links?.map(mapNavLink) || [],
         }))
       : []
     if (header.length > 0) {

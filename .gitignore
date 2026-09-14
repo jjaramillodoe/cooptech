@@ -54,3 +54,15 @@ playwright/.cache
 Thumbs.db
 .idea
 *.swp
+
+# private keys
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.p8
+*.p19
+*.p256
+*.p384
+*.p521

@@ -13,7 +13,7 @@ Production Next.js replica of the [School of Cooperative Technical Education](ht
 
 ## Prerequisites
 
-- Node.js 20.9+
+- Node.js 22 (Vercel also supports 24; this repo is pinned to 22.x)
 - pnpm 11
 - Docker (for local MongoDB) **or** a MongoDB Atlas connection string
 

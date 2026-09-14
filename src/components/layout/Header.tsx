@@ -3,10 +3,11 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChevronDown, Globe, Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import classNames from 'classnames'
 
 import { Logo } from '@/components/brand/Logo'
+import { GoogleTranslate } from '@/components/layout/GoogleTranslate'
 import { Button } from '@/components/ui/Button'
 import type { NavItem } from '@/types/content'
 
@@ -50,21 +51,7 @@ export function Header({ items }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-fog-100 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-end px-4 pt-2 sm:px-6">
-        <label className="inline-flex items-center gap-1.5 text-xs text-ink-500">
-          <Globe className="h-3.5 w-3.5" aria-hidden="true" />
-          <span className="sr-only">Select language</span>
-          <select
-            aria-label="Select language"
-            className="cursor-pointer bg-transparent text-xs text-ink-500 outline-none"
-            defaultValue="en"
-          >
-            <option value="en">Select Language</option>
-            <option value="es">Español</option>
-            <option value="zh">中文</option>
-            <option value="ar">العربية</option>
-            <option value="bn">বাংলা</option>
-          </select>
-        </label>
+        <GoogleTranslate />
       </div>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 pb-3 sm:px-6">
         <Logo priority />

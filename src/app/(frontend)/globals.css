@@ -177,3 +177,35 @@ body {
     justify-content: center;
   }
 }
+
+/* Hide Google Translate chrome; the header select drives it. */
+.google-translate-widget {
+  position: absolute;
+  left: -9999px;
+  height: 0;
+  overflow: hidden;
+}
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+.goog-te-gadget,
+.goog-logo-link,
+.goog-te-combo,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-te-spinner-pos {
+  display: none !important;
+}
+
+.skiptranslate iframe {
+  visibility: hidden !important;
+  height: 0 !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+html.translated-ltr,
+html.translated-rtl {
+  margin-top: 0 !important;
+}

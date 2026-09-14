@@ -37,6 +37,7 @@ These names are what the app reads. Set them in `.env` locally and in the Vercel
 | `NEXT_PUBLIC_SERVER_URL` | yes | Canonical site URL, no trailing slash |
 | `MAPBOX_TOKEN` | contact map | Public `pk.*` Mapbox token |
 | `BLOB_READ_WRITE_TOKEN` | media uploads | Vercel Blob token (auto-added when the store is connected) |
+| `TWO_FACTOR_ENCRYPTION_KEY` | yes (admin MFA) | 64-character hex key that encrypts authenticator secrets. Generate with `openssl rand -hex 32` |
 
 ## MongoDB
 
@@ -79,6 +80,7 @@ This upserts pages, programs, staff, announcements, and navigation from `src/dat
 2. Add the environment variables above for Production (and Preview if needed).
 3. Connect the public Blob store so `BLOB_READ_WRITE_TOKEN` is injected.
 4. Deploy, open `/admin`, create the first user, then run seed against production Mongo if the CMS is empty.
+5. Set `TWO_FACTOR_ENCRYPTION_KEY` in Vercel. After the first password login, CMS users are sent to **Account** to scan a QR code in an authenticator app. Later logins require that 6-digit code.
 
 ## Playwright capture
 

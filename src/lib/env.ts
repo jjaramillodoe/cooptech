@@ -5,3 +5,6 @@ export const siteUrl =
 
 export const blobToken =
   process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_READ_WRITE_TOKEN_PROD
+
+/** 64-character hex key used to encrypt TOTP secrets. Generate with: openssl rand -hex 32 */
+export const twoFactorEncryptionKey = process.env.TWO_FACTOR_ENCRYPTION_KEY || ''

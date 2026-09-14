@@ -17,6 +17,7 @@ import { Navigation } from './globals/Navigation'
 import { blobStorage } from './plugins/blob'
 import { importExport } from './plugins/importExport'
 import { seo } from './plugins/seo'
+import { twoFactor } from './plugins/twoFactor'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,7 +34,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Pages, Programs, Announcements, Staff, ContactSubmissions],
   globals: [Navigation, Banner],
-  plugins: [seo, importExport, blobStorage],
+  plugins: [seo, importExport, blobStorage, twoFactor],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

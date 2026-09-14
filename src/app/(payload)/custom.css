@@ -1,1 +1,6 @@
 /* Payload admin theme overrides */
+
+/* MFA is required — hide the plugin's self-serve disable control. */
+.payload-two-factor__enabled-status button {
+  display: none !important;
+}

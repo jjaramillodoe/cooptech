@@ -31,6 +31,7 @@
     "@payloadcms/richtext-lexical": "^3.50.0",
     "@payloadcms/storage-vercel-blob": "^3.88.0",
     "@payloadcms/ui": "^3.50.0",
+    "@plutotcool/payload-plugin-two-factor": "^1.0.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.8.0",
     "classnames": "^2.5.1",

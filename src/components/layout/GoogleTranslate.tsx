@@ -5,32 +5,51 @@ import { usePathname } from 'next/navigation'
 import { ChevronDown, Globe } from 'lucide-react'
 import classNames from 'classnames'
 
-const LANGUAGES = [
+export const LANGUAGES = [
   { value: 'en', google: 'en', label: 'Select Language' },
-  { value: 'es', google: 'es', label: 'Español' },
-  { value: 'zh', google: 'zh-CN', label: '中文' },
-  { value: 'ar', google: 'ar', label: 'العربية' },
-  { value: 'bn', google: 'bn', label: 'বাংলা' },
-  { value: 'ht', google: 'ht', label: 'Kreyòl Ayisyen' },
-  { value: 'nl', google: 'nl', label: 'Nederlands' },
-  { value: 'pl', google: 'pl', label: 'Polski' },
-  { value: 'pt', google: 'pt', label: 'Português' },
-  { value: 'ro', google: 'ro', label: 'Română' },
-  { value: 'sv', google: 'sv', label: 'Svenska' },
-  { value: 'th', google: 'th', label: 'ไทย' },
-  { value: 'tl', google: 'tl', label: 'Tagalog' },
-  { value: 'uk', google: 'uk', label: 'Українська' },
-  { value: 'vi', google: 'vi', label: 'Tiếng Việt' },
-  { value: 'zu', google: 'zu', label: 'Zulu' },
-  { value: 'ja', google: 'ja', label: '日本語' },
-  { value: 'ko', google: 'ko', label: '한국어' },
-  { value: 'ru', google: 'ru', label: 'Русский' },
-  { value: 'tr', google: 'tr', label: 'Türkçe' },
-  { value: 'vi', google: 'vi', label: 'Tiếng Việt' },
-  { value: 'zu', google: 'zu', label: 'Zulu' },
-  { value: 'ja', google: 'ja', label: '日本語' },
-  { value: 'ko', google: 'ko', label: '한국어' },
-] as const
+  { value: 'af', google: 'af', label: 'Afrikaans' },
+  { value: 'ar', google: 'ar', label: 'العربية (Arabic)' },
+  { value: 'bn', google: 'bn', label: 'বাংলা (Bengali)' },
+  { value: 'bg', google: 'bg', label: 'Български (Bulgarian)' },
+  { value: 'cs', google: 'cs', label: 'Čeština (Czech)' },
+  { value: 'da', google: 'da', label: 'Dansk (Danish)' },
+  { value: 'nl', google: 'nl', label: 'Nederlands (Dutch)' },
+  { value: 'en', google: 'en', label: 'English' },
+  { value: 'fi', google: 'fi', label: 'Suomi (Finnish)' },
+  { value: 'fr', google: 'fr', label: 'Français (French)' },
+  { value: 'de', google: 'de', label: 'Deutsch (German)' },
+  { value: 'el', google: 'el', label: 'Ελληνικά (Greek)' },
+  { value: 'ht', google: 'ht', label: 'Kreyòl Ayisyen (Haitian Creole)' },
+  { value: 'he', google: 'iw', label: 'עברית (Hebrew)' },
+  { value: 'hi', google: 'hi', label: 'हिन्दी (Hindi)' },
+  { value: 'hu', google: 'hu', label: 'Magyar (Hungarian)' },
+  { value: 'id', google: 'id', label: 'Bahasa Indonesia (Indonesian)' },
+  { value: 'it', google: 'it', label: 'Italiano (Italian)' },
+  { value: 'ja', google: 'ja', label: '日本語 (Japanese)' },
+  { value: 'ko', google: 'ko', label: '한국어 (Korean)' },
+  { value: 'ms', google: 'ms', label: 'Bahasa Melayu (Malay)' },
+  { value: 'mr', google: 'mr', label: 'मराठी (Marathi)' },
+  { value: 'fa', google: 'fa', label: 'فارسی (Persian)' },
+  { value: 'pl', google: 'pl', label: 'Polski (Polish)' },
+  { value: 'pt', google: 'pt', label: 'Português (Portuguese)' },
+  { value: 'pa', google: 'pa', label: 'ਪੰਜਾਬੀ (Punjabi)' },
+  { value: 'ro', google: 'ro', label: 'Română (Romanian)' },
+  { value: 'ru', google: 'ru', label: 'Русский (Russian)' },
+  { value: 'zh-CN', google: 'zh-CN', label: '简体中文 (Simplified Chinese)' },
+  { value: 'es', google: 'es', label: 'Español (Spanish)' },
+  { value: 'sw', google: 'sw', label: 'Kiswahili (Swahili)' },
+  { value: 'sv', google: 'sv', label: 'Svenska (Swedish)' },
+  { value: 'tl', google: 'tl', label: 'Tagalog / Filipino' },
+  { value: 'ta', google: 'ta', label: 'தமிழ் (Tamil)' },
+  { value: 'te', google: 'te', label: 'తెలుగు (Telugu)' },
+  { value: 'th', google: 'th', label: 'ไทย (Thai)' },
+  { value: 'zh-TW', google: 'zh-TW', label: '繁體中文 (Traditional Chinese)' },
+  { value: 'tr', google: 'tr', label: 'Türkçe (Turkish)' },
+  { value: 'uk', google: 'uk', label: 'Українська (Ukrainian)' },
+  { value: 'ur', google: 'ur', label: 'اردو (Urdu)' },
+  { value: 'vi', google: 'vi', label: 'Tiếng Việt (Vietnamese)' },
+  { value: 'zu', google: 'zu', label: 'isiZulu (Zulu)' },
+] as const;
 
 type LanguageValue = (typeof LANGUAGES)[number]['value']
 
@@ -53,7 +72,8 @@ declare global {
 }
 
 function toLanguageValue(code: string): LanguageValue {
-  if (code === 'zh-CN' || code === 'zh-TW') return 'zh'
+  if (code === 'zh') return 'zh-CN'
+  if (code === 'iw') return 'he'
   return LANGUAGES.some((language) => language.value === code) ? (code as LanguageValue) : 'en'
 }
 

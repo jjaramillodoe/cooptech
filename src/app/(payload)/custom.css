@@ -4,3 +4,12 @@
 .payload-two-factor__enabled-status button {
   display: none !important;
 }
+
+/* Plugin QR is an SVG data URI in <img>, which admin often fails to paint. */
+.payload-two-factor__qr-code svg {
+  display: block;
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  border-radius: 8px;
+}

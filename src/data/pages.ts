@@ -341,6 +341,22 @@ export const fallbackPages: PageData[] = [
           },
         ],
       },
+      {
+        blockType: 'logoStrip',
+        eyebrow: 'Partnerships',
+        heading: 'Our trusted partners',
+        intro: 'Employers, city agencies, and industry sites that help students move from the shop into real work.',
+        logos: [
+          { name: 'NYC Department of Sanitation', imageUrl: '/images/partners/nycdos.webp' },
+          { name: 'Elite Optics Inc.', imageUrl: '/images/partners/elite.webp' },
+          { name: 'Division of Instructional & Information Technology', imageUrl: '/images/partners/diit.webp' },
+          { name: 'Nubian Hair Studio', imageUrl: '/images/partners/nubian.webp' },
+          { name: 'CVS', imageUrl: '/images/partners/cvs.webp' },
+          { name: 'Brothers Guitar Shop NYC', imageUrl: '/images/partners/brothers.webp' },
+          { name: 'Center for Architecture', imageUrl: '/images/partners/centerarch.webp' },
+          { name: 'Teddy Nissan', imageUrl: '/images/partners/teddy.webp' },
+        ],
+      },
     ],
   },
   {
@@ -384,6 +400,35 @@ export const fallbackPages: PageData[] = [
         secondaryHref: '/programs',
         imageUrl:
           'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80',
+      },
+      {
+        blockType: 'contactCards',
+        heading: 'Reach Coop Tech',
+        intro: 'Admissions, the main campus, and office hours for the Manhattan site.',
+        items: [
+          {
+            icon: 'mail',
+            label: 'Admissions',
+            value: 'coopadmissions@schools.nyc.gov',
+            href: 'mailto:coopadmissions@schools.nyc.gov',
+          },
+          {
+            icon: 'phone',
+            label: 'Main campus',
+            value: '212-369-8800',
+            href: 'tel:2123698800',
+          },
+          {
+            icon: 'map-pin',
+            label: 'Address',
+            value: '321 East 96th Street, New York, NY 10128',
+          },
+          {
+            icon: 'clock',
+            label: 'Typical sessions',
+            value: '8:30–11:00 a.m. or 12:20–2:50 p.m.',
+          },
+        ],
       },
     ],
   },

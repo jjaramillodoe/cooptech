@@ -151,6 +151,27 @@ function toLayout(blocks: LayoutBlock[]) {
         })),
       }
     }
+    if (block.blockType === 'logoStrip') {
+      return {
+        blockType: 'logoStrip' as const,
+        eyebrow: block.eyebrow,
+        heading: block.heading,
+        intro: block.intro,
+        logos: block.logos.map((item) => ({
+          name: item.name,
+          fallbackImage: item.imageUrl,
+          href: item.href,
+        })),
+      }
+    }
+    if (block.blockType === 'contactCards') {
+      return {
+        blockType: 'contactCards' as const,
+        heading: block.heading,
+        intro: block.intro,
+        items: block.items,
+      }
+    }
     const unhandled: never = block
     throw new Error(`Unsupported layout block: ${JSON.stringify(unhandled)}`)
   })

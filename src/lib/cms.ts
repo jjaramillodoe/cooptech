@@ -33,6 +33,9 @@ import type {
   SeoMeta,
   SplitSectionBlockData,
   StatsBlockData,
+  ContactCardIcon,
+  ContactCardsBlockData,
+  LogoStripBlockData,
   TestimonialRating,
   TestimonialsBlockData,
   TextSectionBlockData,
@@ -363,6 +366,47 @@ function mapBlock(block: Record<string, unknown>): LayoutBlock | null {
       buttonHref: block.buttonHref ? String(block.buttonHref) : undefined,
       items,
     } satisfies TestimonialsBlockData
+  }
+
+  if (type === 'logoStrip') {
+    const logos = Array.isArray(block.logos)
+      ? block.logos.map((item: Record<string, unknown>) => ({
+          name: String(item.name ?? ''),
+          imageUrl: mediaUrl(
+            item.image as never,
+            typeof item.fallbackImage === 'string' ? item.fallbackImage : undefined,
+          ),
+          href: item.href ? String(item.href) : undefined,
+        }))
+      : []
+    return {
+      blockType: 'logoStrip',
+      eyebrow: block.eyebrow ? String(block.eyebrow) : undefined,
+      heading: block.heading ? String(block.heading) : undefined,
+      intro: block.intro ? String(block.intro) : undefined,
+      logos,
+    } satisfies LogoStripBlockData
+  }
+
+  if (type === 'contactCards') {
+    const icons: ContactCardIcon[] = ['mail', 'phone', 'map-pin', 'clock', 'building', 'globe']
+    const items = Array.isArray(block.items)
+      ? block.items.map((item: Record<string, unknown>) => {
+          const icon = item.icon ? String(item.icon) : undefined
+          return {
+            icon: icon && icons.includes(icon as ContactCardIcon) ? (icon as ContactCardIcon) : undefined,
+            label: String(item.label ?? ''),
+            value: String(item.value ?? ''),
+            href: item.href ? String(item.href) : undefined,
+          }
+        })
+      : []
+    return {
+      blockType: 'contactCards',
+      heading: block.heading ? String(block.heading) : undefined,
+      intro: block.intro ? String(block.intro) : undefined,
+      items,
+    } satisfies ContactCardsBlockData
   }
 
   return null

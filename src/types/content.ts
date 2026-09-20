@@ -267,6 +267,36 @@ export interface TestimonialsBlockData {
   items: TestimonialItem[]
 }
 
+export interface LogoStripItem {
+  name: string
+  imageUrl?: string
+  href?: string
+}
+
+export interface LogoStripBlockData {
+  blockType: 'logoStrip'
+  eyebrow?: string
+  heading?: string
+  intro?: string
+  logos: LogoStripItem[]
+}
+
+export type ContactCardIcon = 'mail' | 'phone' | 'map-pin' | 'clock' | 'building' | 'globe'
+
+export interface ContactCardItem {
+  icon?: ContactCardIcon
+  label: string
+  value: string
+  href?: string
+}
+
+export interface ContactCardsBlockData {
+  blockType: 'contactCards'
+  heading?: string
+  intro?: string
+  items: ContactCardItem[]
+}
+
 export type LayoutBlock =
   | HeroBlockData
   | ImageTextGridBlockData
@@ -281,6 +311,8 @@ export type LayoutBlock =
   | GalleryBlockData
   | VideoBlockData
   | TestimonialsBlockData
+  | LogoStripBlockData
+  | ContactCardsBlockData
 
 export interface PageData {
   title: string

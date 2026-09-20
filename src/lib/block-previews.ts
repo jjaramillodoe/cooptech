@@ -8,6 +8,8 @@ export const blockPreview = {
   stats: '/admin/block-previews/stats.svg',
   quote: '/admin/block-previews/quote.svg',
   testimonials: '/admin/block-previews/testimonials.svg',
+  logoStrip: '/admin/block-previews/logo-strip.svg',
+  contactCards: '/admin/block-previews/contact-cards.svg',
   gallery: '/admin/block-previews/gallery.svg',
   video: '/admin/block-previews/video.svg',
   accordion: '/admin/block-previews/accordion.svg',

@@ -1,10 +1,12 @@
 import { AccordionBlock } from '@/components/blocks/AccordionBlock'
 import { ArticleBlock } from '@/components/blocks/ArticleBlock'
+import { ContactCardsBlock } from '@/components/blocks/ContactCardsBlock'
 import { CTABanner } from '@/components/blocks/CTABanner'
 import { FeatureGridBlock } from '@/components/blocks/FeatureGridBlock'
 import { GalleryBlock } from '@/components/blocks/GalleryBlock'
 import { Hero } from '@/components/blocks/Hero'
 import { ImageTextGrid } from '@/components/blocks/ImageTextGrid'
+import { LogoStripBlock } from '@/components/blocks/LogoStripBlock'
 import { QuoteBlock } from '@/components/blocks/QuoteBlock'
 import { SplitSectionBlock } from '@/components/blocks/SplitSectionBlock'
 import { StatsBlock } from '@/components/blocks/StatsBlock'
@@ -45,6 +47,10 @@ export function RenderBlocks({ blocks }: { blocks: LayoutBlock[] }) {
             return <VideoBlock key={key} block={block} />
           case 'testimonials':
             return <TestimonialsBlock key={key} block={block} />
+          case 'logoStrip':
+            return <LogoStripBlock key={key} block={block} />
+          case 'contactCards':
+            return <ContactCardsBlock key={key} block={block} />
           default:
             return null
         }

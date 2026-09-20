@@ -2,11 +2,13 @@ import type { Block, CollectionConfig } from 'payload'
 
 import { Accordion } from '../blocks/Accordion'
 import { Article } from '../blocks/Article'
+import { ContactCards } from '../blocks/ContactCards'
 import { CTABanner } from '../blocks/CTABanner'
 import { FeatureGrid } from '../blocks/FeatureGrid'
 import { Gallery } from '../blocks/Gallery'
 import { Hero } from '../blocks/Hero'
 import { ImageTextGrid } from '../blocks/ImageTextGrid'
+import { LogoStrip } from '../blocks/LogoStrip'
 import { Quote } from '../blocks/Quote'
 import { SplitSection } from '../blocks/SplitSection'
 import { Stats } from '../blocks/Stats'
@@ -88,6 +90,8 @@ export const Pages: CollectionConfig = {
         Stats,
         Quote,
         Testimonials,
+        LogoStrip,
+        ContactCards,
         Gallery,
         Video,
         Accordion,

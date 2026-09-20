@@ -132,6 +132,25 @@ function toLayout(blocks: LayoutBlock[]) {
         caption: block.caption,
       }
     }
+    if (block.blockType === 'testimonials') {
+      return {
+        blockType: 'testimonials' as const,
+        eyebrow: block.eyebrow,
+        heading: block.heading,
+        intro: block.intro,
+        buttonLabel: block.buttonLabel,
+        buttonHref: block.buttonHref,
+        items: block.items.map((item) => ({
+          authorName: item.authorName,
+          authorRole: item.authorRole,
+          authorCompany: item.authorCompany,
+          rating: item.rating,
+          quote: item.quote,
+          fallbackImage: item.imageUrl,
+          imageAlt: item.imageAlt,
+        })),
+      }
+    }
     const unhandled: never = block
     throw new Error(`Unsupported layout block: ${JSON.stringify(unhandled)}`)
   })

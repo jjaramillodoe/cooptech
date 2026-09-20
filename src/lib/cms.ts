@@ -33,6 +33,8 @@ import type {
   SeoMeta,
   SplitSectionBlockData,
   StatsBlockData,
+  TestimonialRating,
+  TestimonialsBlockData,
   TextSectionBlockData,
   VideoBlockData,
 } from '@/types/content'
@@ -331,6 +333,36 @@ function mapBlock(block: Record<string, unknown>): LayoutBlock | null {
       url: String(block.url ?? ''),
       caption: block.caption ? String(block.caption) : undefined,
     } satisfies VideoBlockData
+  }
+
+  if (type === 'testimonials') {
+    const ratings: TestimonialRating[] = ['5', '4.5', '4', '3.5', '3']
+    const items = Array.isArray(block.items)
+      ? block.items.map((item: Record<string, unknown>) => {
+          const rating = item.rating ? String(item.rating) : undefined
+          return {
+            authorName: String(item.authorName ?? ''),
+            authorRole: item.authorRole ? String(item.authorRole) : undefined,
+            authorCompany: item.authorCompany ? String(item.authorCompany) : undefined,
+            rating: rating && ratings.includes(rating as TestimonialRating) ? (rating as TestimonialRating) : undefined,
+            quote: String(item.quote ?? ''),
+            imageUrl: mediaUrl(
+              item.image as never,
+              typeof item.fallbackImage === 'string' ? item.fallbackImage : undefined,
+            ),
+            imageAlt: item.imageAlt ? String(item.imageAlt) : undefined,
+          }
+        })
+      : []
+    return {
+      blockType: 'testimonials',
+      eyebrow: block.eyebrow ? String(block.eyebrow) : undefined,
+      heading: block.heading ? String(block.heading) : undefined,
+      intro: block.intro ? String(block.intro) : undefined,
+      buttonLabel: block.buttonLabel ? String(block.buttonLabel) : undefined,
+      buttonHref: block.buttonHref ? String(block.buttonHref) : undefined,
+      items,
+    } satisfies TestimonialsBlockData
   }
 
   return null

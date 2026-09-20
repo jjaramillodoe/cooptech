@@ -1,0 +1,15 @@
+export const blockPreview = {
+  hero: '/admin/block-previews/hero.svg',
+  article: '/admin/block-previews/article.svg',
+  textSection: '/admin/block-previews/text-section.svg',
+  imageTextGrid: '/admin/block-previews/image-text-grid.svg',
+  featureGrid: '/admin/block-previews/feature-grid.svg',
+  splitSection: '/admin/block-previews/split-section.svg',
+  stats: '/admin/block-previews/stats.svg',
+  quote: '/admin/block-previews/quote.svg',
+  testimonials: '/admin/block-previews/testimonials.svg',
+  gallery: '/admin/block-previews/gallery.svg',
+  video: '/admin/block-previews/video.svg',
+  accordion: '/admin/block-previews/accordion.svg',
+  ctaBanner: '/admin/block-previews/cta-banner.svg',
+} as const

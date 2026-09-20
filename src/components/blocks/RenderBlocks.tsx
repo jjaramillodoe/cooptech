@@ -8,6 +8,7 @@ import { ImageTextGrid } from '@/components/blocks/ImageTextGrid'
 import { QuoteBlock } from '@/components/blocks/QuoteBlock'
 import { SplitSectionBlock } from '@/components/blocks/SplitSectionBlock'
 import { StatsBlock } from '@/components/blocks/StatsBlock'
+import { TestimonialsBlock } from '@/components/blocks/TestimonialsBlock'
 import { TextSectionBlock } from '@/components/blocks/TextSectionBlock'
 import { VideoBlock } from '@/components/blocks/VideoBlock'
 import type { LayoutBlock } from '@/types/content'
@@ -42,6 +43,8 @@ export function RenderBlocks({ blocks }: { blocks: LayoutBlock[] }) {
             return <GalleryBlock key={key} block={block} />
           case 'video':
             return <VideoBlock key={key} block={block} />
+          case 'testimonials':
+            return <TestimonialsBlock key={key} block={block} />
           default:
             return null
         }

@@ -301,6 +301,46 @@ export const fallbackPages: PageData[] = [
         attribution: 'Coop Tech',
         role: "Principal's message",
       },
+      {
+        blockType: 'testimonials',
+        eyebrow: 'Student voices',
+        heading: 'What students say about Coop Tech',
+        intro: 'Hands-on shops, industry credentials, and a half-day schedule that works with a home school.',
+        buttonLabel: 'See programs',
+        buttonHref: '/programs',
+        items: [
+          {
+            authorName: 'Shared-instruction student',
+            authorRole: 'Automotive Services',
+            authorCompany: 'Coop Tech',
+            rating: '5',
+            quote:
+              'I stay at my home school for academics and come here for the shop. The tools and the teachers make it feel like a real garage.',
+            imageUrl:
+              'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=80',
+            imageAlt: 'Student working in an automotive shop',
+          },
+          {
+            authorName: 'Post-graduate student',
+            authorRole: 'Health Services',
+            authorCompany: 'Coop Tech',
+            rating: '5',
+            quote:
+              'After I earned my diploma I still wanted a trade. The clinic labs and certifications gave me a path into healthcare.',
+          },
+          {
+            authorName: 'Work-Based Learning student',
+            authorRole: 'Construction',
+            authorCompany: 'Coop Tech',
+            rating: '4.5',
+            quote:
+              'The internship matched what we practiced in the shop. OSHA and job-readiness made the first day on site less intimidating.',
+            imageUrl:
+              'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80',
+            imageAlt: 'Construction training site',
+          },
+        ],
+      },
     ],
   },
   {

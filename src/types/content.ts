@@ -245,6 +245,28 @@ export interface VideoBlockData {
   caption?: string
 }
 
+export type TestimonialRating = '5' | '4.5' | '4' | '3.5' | '3'
+
+export interface TestimonialItem {
+  authorName: string
+  authorRole?: string
+  authorCompany?: string
+  rating?: TestimonialRating
+  quote: string
+  imageUrl?: string
+  imageAlt?: string
+}
+
+export interface TestimonialsBlockData {
+  blockType: 'testimonials'
+  eyebrow?: string
+  heading?: string
+  intro?: string
+  buttonLabel?: string
+  buttonHref?: string
+  items: TestimonialItem[]
+}
+
 export type LayoutBlock =
   | HeroBlockData
   | ImageTextGridBlockData
@@ -258,6 +280,7 @@ export type LayoutBlock =
   | QuoteBlockData
   | GalleryBlockData
   | VideoBlockData
+  | TestimonialsBlockData
 
 export interface PageData {
   title: string

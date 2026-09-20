@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { Block, CollectionConfig } from 'payload'
 
 import { Accordion } from '../blocks/Accordion'
 import { Article } from '../blocks/Article'
@@ -10,8 +10,21 @@ import { ImageTextGrid } from '../blocks/ImageTextGrid'
 import { Quote } from '../blocks/Quote'
 import { SplitSection } from '../blocks/SplitSection'
 import { Stats } from '../blocks/Stats'
+import { Testimonials } from '../blocks/Testimonials'
 import { TextSection } from '../blocks/TextSection'
 import { Video } from '../blocks/Video'
+import { blockPreview } from '../lib/block-previews'
+
+function withPreview(block: Block): Block {
+  const url = blockPreview[block.slug as keyof typeof blockPreview]
+  if (!url) return block
+  const label = typeof block.labels?.singular === 'string' ? block.labels.singular : block.slug
+  return {
+    ...block,
+    imageURL: url,
+    imageAltText: `${label} layout preview`,
+  }
+}
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -65,7 +78,21 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [Hero, Article, TextSection, ImageTextGrid, FeatureGrid, SplitSection, Stats, Quote, Gallery, Video, Accordion, CTABanner],
+      blocks: [
+        Hero,
+        Article,
+        TextSection,
+        ImageTextGrid,
+        FeatureGrid,
+        SplitSection,
+        Stats,
+        Quote,
+        Testimonials,
+        Gallery,
+        Video,
+        Accordion,
+        CTABanner,
+      ].map(withPreview),
     },
   ],
 }

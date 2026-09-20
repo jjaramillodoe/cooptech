@@ -13,3 +13,11 @@
   background: #fff;
   border-radius: 8px;
 }
+
+/* Layout picker: show the block sketch instead of a cropped stock photo. */
+.blocks-drawer__block img,
+.drawer__content .blocks-drawer img,
+.thumbnail.blocks-drawer__block-image img {
+  object-fit: contain !important;
+  background: #f4f6f8;
+}

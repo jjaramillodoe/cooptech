@@ -158,12 +158,106 @@ export interface ArticleBlockData {
   sections: ArticleSection[]
 }
 
+export interface TextSectionBlockData {
+  blockType: 'textSection'
+  heading?: string
+  body: string
+  buttonLabel?: string
+  buttonHref?: string
+}
+
+export interface StatsItem {
+  value: string
+  label: string
+}
+
+export interface StatsBlockData {
+  blockType: 'stats'
+  heading?: string
+  items: StatsItem[]
+}
+
+export type FeatureGridIcon =
+  | 'graduation-cap'
+  | 'users'
+  | 'award'
+  | 'book'
+  | 'calendar'
+  | 'clock'
+  | 'building'
+  | 'map-pin'
+  | 'phone'
+  | 'mail'
+  | 'heart'
+  | 'check'
+  | 'star'
+
+export interface FeatureGridItem {
+  icon?: FeatureGridIcon
+  title: string
+  body: string
+  href?: string
+  linkLabel?: string
+}
+
+export interface FeatureGridBlockData {
+  blockType: 'featureGrid'
+  heading?: string
+  intro?: string
+  items: FeatureGridItem[]
+}
+
+export interface SplitSectionBlockData {
+  blockType: 'splitSection'
+  imagePosition?: 'left' | 'right'
+  eyebrow?: string
+  heading: string
+  body: string
+  buttonLabel?: string
+  buttonHref?: string
+  imageUrl?: string
+  imageAlt?: string
+}
+
+export interface QuoteBlockData {
+  blockType: 'quote'
+  quote: string
+  attribution?: string
+  role?: string
+}
+
+export interface GalleryImage {
+  imageUrl?: string
+  alt?: string
+  caption?: string
+}
+
+export interface GalleryBlockData {
+  blockType: 'gallery'
+  heading?: string
+  images: GalleryImage[]
+}
+
+export interface VideoBlockData {
+  blockType: 'video'
+  heading?: string
+  url: string
+  caption?: string
+}
+
 export type LayoutBlock =
   | HeroBlockData
   | ImageTextGridBlockData
   | AccordionBlockData
   | CTABannerBlockData
   | ArticleBlockData
+  | TextSectionBlockData
+  | StatsBlockData
+  | FeatureGridBlockData
+  | SplitSectionBlockData
+  | QuoteBlockData
+  | GalleryBlockData
+  | VideoBlockData
 
 export interface PageData {
   title: string

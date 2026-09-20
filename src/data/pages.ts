@@ -256,6 +256,51 @@ export const fallbackPages: PageData[] = [
           },
         ],
       },
+      {
+        blockType: 'stats',
+        heading: 'Coop Tech at a glance',
+        items: [
+          { value: '30+', label: 'Years of CTE' },
+          { value: '1,500', label: 'Students citywide' },
+          { value: '5', label: 'Boroughs served' },
+          { value: '17–21', label: 'Student ages' },
+        ],
+      },
+      {
+        blockType: 'featureGrid',
+        heading: 'How students join us',
+        intro: 'Coop Tech is a half-day vocational program with pathways for current high school students and recent graduates.',
+        items: [
+          {
+            icon: 'graduation-cap',
+            title: 'Shared instruction',
+            body: 'Stay enrolled at your home high school or Pathways to Graduation program and attend Coop Tech for a half-day shop session.',
+            href: '/admissions',
+            linkLabel: 'How to apply',
+          },
+          {
+            icon: 'users',
+            title: 'Post-graduates',
+            body: 'Students who already hold a diploma may enroll while they remain within the Department of Education age limit of 21.',
+            href: '/admissions',
+            linkLabel: 'See eligibility',
+          },
+          {
+            icon: 'award',
+            title: 'Work-based learning',
+            body: 'Job-readiness, OSHA, CPR, and internship placements that turn shop training into real work experience.',
+            href: '/resources',
+            linkLabel: 'Student resources',
+          },
+        ],
+      },
+      {
+        blockType: 'quote',
+        quote:
+          'We strongly believe that all students can be prepared to meet the industry demands and workforce challenges in a caring, supportive, rigorous and highly academic student-centered environment.',
+        attribution: 'Coop Tech',
+        role: "Principal's message",
+      },
     ],
   },
   {

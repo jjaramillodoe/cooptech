@@ -16,6 +16,8 @@ import type {
   BannerIcon,
   BannerTone,
   CTABannerBlockData,
+  FeatureGridBlockData,
+  GalleryBlockData,
   HeroBlockData,
   ImageTextGridBlockData,
   FooterColumn,
@@ -26,7 +28,13 @@ import type {
   PageData,
   Program,
   ProgramCategory,
+  QuoteBlockData,
+  FeatureGridIcon,
   SeoMeta,
+  SplitSectionBlockData,
+  StatsBlockData,
+  TextSectionBlockData,
+  VideoBlockData,
 } from '@/types/content'
 import type { StaffCategory, StaffMember } from '@/types/staff'
 
@@ -210,6 +218,119 @@ function mapBlock(block: Record<string, unknown>): LayoutBlock | null {
       buttonLabel: block.buttonLabel ? String(block.buttonLabel) : undefined,
       buttonHref: block.buttonHref ? String(block.buttonHref) : undefined,
     } satisfies CTABannerBlockData
+  }
+
+  if (type === 'textSection') {
+    return {
+      blockType: 'textSection',
+      heading: block.heading ? String(block.heading) : undefined,
+      body: String(block.body ?? ''),
+      buttonLabel: block.buttonLabel ? String(block.buttonLabel) : undefined,
+      buttonHref: block.buttonHref ? String(block.buttonHref) : undefined,
+    } satisfies TextSectionBlockData
+  }
+
+  if (type === 'stats') {
+    const items = Array.isArray(block.items)
+      ? block.items.map((item: Record<string, unknown>) => ({
+          value: String(item.value ?? ''),
+          label: String(item.label ?? ''),
+        }))
+      : []
+    return {
+      blockType: 'stats',
+      heading: block.heading ? String(block.heading) : undefined,
+      items,
+    } satisfies StatsBlockData
+  }
+
+  if (type === 'featureGrid') {
+    const icons: FeatureGridIcon[] = [
+      'graduation-cap',
+      'users',
+      'award',
+      'book',
+      'calendar',
+      'clock',
+      'building',
+      'map-pin',
+      'phone',
+      'mail',
+      'heart',
+      'check',
+      'star',
+    ]
+    const items = Array.isArray(block.items)
+      ? block.items.map((item: Record<string, unknown>) => {
+          const icon = item.icon ? String(item.icon) : undefined
+          return {
+            icon: icon && icons.includes(icon as FeatureGridIcon) ? (icon as FeatureGridIcon) : undefined,
+            title: String(item.title ?? ''),
+            body: String(item.body ?? ''),
+            href: item.href ? String(item.href) : undefined,
+            linkLabel: item.linkLabel ? String(item.linkLabel) : undefined,
+          }
+        })
+      : []
+    return {
+      blockType: 'featureGrid',
+      heading: block.heading ? String(block.heading) : undefined,
+      intro: block.intro ? String(block.intro) : undefined,
+      items,
+    } satisfies FeatureGridBlockData
+  }
+
+  if (type === 'splitSection') {
+    return {
+      blockType: 'splitSection',
+      imagePosition: block.imagePosition === 'right' ? 'right' : 'left',
+      eyebrow: block.eyebrow ? String(block.eyebrow) : undefined,
+      heading: String(block.heading ?? ''),
+      body: String(block.body ?? ''),
+      buttonLabel: block.buttonLabel ? String(block.buttonLabel) : undefined,
+      buttonHref: block.buttonHref ? String(block.buttonHref) : undefined,
+      imageUrl: mediaUrl(
+        block.image as never,
+        typeof block.fallbackImage === 'string' ? block.fallbackImage : undefined,
+      ),
+      imageAlt: block.imageAlt ? String(block.imageAlt) : undefined,
+    } satisfies SplitSectionBlockData
+  }
+
+  if (type === 'quote') {
+    return {
+      blockType: 'quote',
+      quote: String(block.quote ?? ''),
+      attribution: block.attribution ? String(block.attribution) : undefined,
+      role: block.role ? String(block.role) : undefined,
+    } satisfies QuoteBlockData
+  }
+
+  if (type === 'gallery') {
+    const images = Array.isArray(block.images)
+      ? block.images.map((item: Record<string, unknown>) => ({
+          imageUrl: mediaUrl(
+            item.image as never,
+            typeof item.fallbackImage === 'string' ? item.fallbackImage : undefined,
+          ),
+          alt: item.alt ? String(item.alt) : undefined,
+          caption: item.caption ? String(item.caption) : undefined,
+        }))
+      : []
+    return {
+      blockType: 'gallery',
+      heading: block.heading ? String(block.heading) : undefined,
+      images,
+    } satisfies GalleryBlockData
+  }
+
+  if (type === 'video') {
+    return {
+      blockType: 'video',
+      heading: block.heading ? String(block.heading) : undefined,
+      url: String(block.url ?? ''),
+      caption: block.caption ? String(block.caption) : undefined,
+    } satisfies VideoBlockData
   }
 
   return null

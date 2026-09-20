@@ -3,8 +3,15 @@ import type { CollectionConfig } from 'payload'
 import { Accordion } from '../blocks/Accordion'
 import { Article } from '../blocks/Article'
 import { CTABanner } from '../blocks/CTABanner'
+import { FeatureGrid } from '../blocks/FeatureGrid'
+import { Gallery } from '../blocks/Gallery'
 import { Hero } from '../blocks/Hero'
 import { ImageTextGrid } from '../blocks/ImageTextGrid'
+import { Quote } from '../blocks/Quote'
+import { SplitSection } from '../blocks/SplitSection'
+import { Stats } from '../blocks/Stats'
+import { TextSection } from '../blocks/TextSection'
+import { Video } from '../blocks/Video'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -58,7 +65,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [Hero, Article, ImageTextGrid, Accordion, CTABanner],
+      blocks: [Hero, Article, TextSection, ImageTextGrid, FeatureGrid, SplitSection, Stats, Quote, Gallery, Video, Accordion, CTABanner],
     },
   ],
 }

@@ -59,13 +59,81 @@ function toLayout(blocks: LayoutBlock[]) {
         sections: block.sections,
       }
     }
-    return {
-      blockType: 'ctaBanner' as const,
-      heading: block.heading,
-      body: block.body,
-      buttonLabel: block.buttonLabel,
-      buttonHref: block.buttonHref,
+    if (block.blockType === 'ctaBanner') {
+      return {
+        blockType: 'ctaBanner' as const,
+        heading: block.heading,
+        body: block.body,
+        buttonLabel: block.buttonLabel,
+        buttonHref: block.buttonHref,
+      }
     }
+    if (block.blockType === 'textSection') {
+      return {
+        blockType: 'textSection' as const,
+        heading: block.heading,
+        body: block.body,
+        buttonLabel: block.buttonLabel,
+        buttonHref: block.buttonHref,
+      }
+    }
+    if (block.blockType === 'stats') {
+      return {
+        blockType: 'stats' as const,
+        heading: block.heading,
+        items: block.items,
+      }
+    }
+    if (block.blockType === 'featureGrid') {
+      return {
+        blockType: 'featureGrid' as const,
+        heading: block.heading,
+        intro: block.intro,
+        items: block.items,
+      }
+    }
+    if (block.blockType === 'splitSection') {
+      return {
+        blockType: 'splitSection' as const,
+        imagePosition: block.imagePosition,
+        eyebrow: block.eyebrow,
+        heading: block.heading,
+        body: block.body,
+        buttonLabel: block.buttonLabel,
+        buttonHref: block.buttonHref,
+        fallbackImage: block.imageUrl,
+        imageAlt: block.imageAlt,
+      }
+    }
+    if (block.blockType === 'quote') {
+      return {
+        blockType: 'quote' as const,
+        quote: block.quote,
+        attribution: block.attribution,
+        role: block.role,
+      }
+    }
+    if (block.blockType === 'gallery') {
+      return {
+        blockType: 'gallery' as const,
+        heading: block.heading,
+        images: block.images.map((item) => ({
+          fallbackImage: item.imageUrl,
+          alt: item.alt,
+          caption: item.caption,
+        })),
+      }
+    }
+    if (block.blockType === 'video') {
+      return {
+        blockType: 'video' as const,
+        heading: block.heading,
+        url: block.url,
+        caption: block.caption,
+      }
+    }
+    const unhandled: never = block
+    throw new Error(`Unsupported layout block: ${JSON.stringify(unhandled)}`)
   })
 }
 

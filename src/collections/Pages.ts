@@ -10,7 +10,7 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'comingSoon', 'updatedAt'],
   },
   access: {
     read: () => true,
@@ -29,6 +29,26 @@ export const Pages: CollectionConfig = {
       index: true,
       admin: {
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'comingSoon',
+      type: 'checkbox',
+      defaultValue: false,
+      label: 'Show Coming Soon page',
+      admin: {
+        position: 'sidebar',
+        description: 'Replace this page on the public site with a Coming Soon message.',
+      },
+    },
+    {
+      name: 'comingSoonMessage',
+      type: 'textarea',
+      label: 'Coming Soon message',
+      admin: {
+        position: 'sidebar',
+        description: 'Optional. Leave blank to use the default message.',
+        condition: (_, siblingData) => Boolean(siblingData?.comingSoon),
       },
     },
     {

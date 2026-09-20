@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
+import { CmsPage } from '@/components/pages/CmsPage'
 import { getAnnouncements, getPageBySlug } from '@/lib/cms'
 import { pageMetadata } from '@/lib/seo'
 
@@ -12,7 +13,7 @@ export default async function ResourcesPage() {
   const [page, announcements] = await Promise.all([getPageBySlug('resources'), getAnnouncements()])
 
   return (
-    <>
+    <CmsPage page={page}>
       {page ? <RenderBlocks blocks={page.layout} /> : null}
       <section className="bg-fog-50 py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -30,6 +31,6 @@ export default async function ResourcesPage() {
           </div>
         </div>
       </section>
-    </>
+    </CmsPage>
   )
 }

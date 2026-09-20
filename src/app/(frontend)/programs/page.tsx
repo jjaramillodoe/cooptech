@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 
+import { CmsPage } from '@/components/pages/CmsPage'
 import { ProgramFilters } from '@/components/programs/ProgramFilters'
-import { getPrograms } from '@/lib/cms'
+import { getPageBySlug, getPrograms } from '@/lib/cms'
 import { pageMetadata } from '@/lib/seo'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -9,9 +10,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProgramsPage() {
-  const programs = await getPrograms()
+  const [programs, page] = await Promise.all([getPrograms(), getPageBySlug('programs')])
 
   return (
+    <CmsPage page={page}>
     <div className="bg-white">
       <section className="blob-field py-16">
         <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
@@ -26,5 +28,6 @@ export default async function ProgramsPage() {
         <ProgramFilters programs={programs} />
       </section>
     </div>
+    </CmsPage>
   )
 }

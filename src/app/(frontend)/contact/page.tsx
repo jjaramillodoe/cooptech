@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
 import { ContactForm } from '@/components/contact/ContactForm'
+import { CmsPage } from '@/components/pages/CmsPage'
 import { ContactLocations } from '@/components/contact/ContactLocations'
 import { campuses } from '@/data/campuses'
 import { getPageBySlug } from '@/lib/cms'
@@ -16,7 +17,7 @@ export default async function ContactPage() {
   const mapboxToken = process.env.MAPBOX_TOKEN || process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''
 
   return (
-    <>
+    <CmsPage page={page}>
       {page ? <RenderBlocks blocks={page.layout} /> : null}
       <section className="w-full bg-fog-50 py-16">
         <ContactLocations token={mapboxToken} campuses={campuses}>
@@ -33,6 +34,6 @@ export default async function ContactPage() {
           </div>
         </ContactLocations>
       </section>
-    </>
+    </CmsPage>
   )
 }

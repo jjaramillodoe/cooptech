@@ -169,6 +169,8 @@ export interface PageData {
   title: string
   slug: string
   excerpt?: string
+  comingSoon?: boolean
+  comingSoonMessage?: string
   layout: LayoutBlock[]
   meta?: SeoMeta
 }

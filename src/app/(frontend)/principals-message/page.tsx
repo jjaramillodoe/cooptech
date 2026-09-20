@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { RenderBlocks } from '@/components/blocks/RenderBlocks'
+import { CmsPage } from '@/components/pages/CmsPage'
 import { getPageBySlug } from '@/lib/cms'
 import { pageMetadata } from '@/lib/seo'
 
@@ -10,6 +10,5 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function PrincipalsMessagePage() {
   const page = await getPageBySlug('principals-message')
-  if (!page) return null
-  return <RenderBlocks blocks={page.layout} />
+  return <CmsPage page={page} />
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { AccordionBlock } from '@/components/blocks/AccordionBlock'
+import { CmsPage } from '@/components/pages/CmsPage'
 import { fallbackFaq } from '@/data/faq'
 import { getPageBySlug } from '@/lib/cms'
 import { pageMetadata } from '@/lib/seo'
@@ -20,6 +21,7 @@ export default async function FaqPage() {
   const sections = accordionSections(page?.layout)
 
   return (
+    <CmsPage page={page}>
     <section className="bg-white px-4 py-12 sm:px-6">
       <div className="mx-auto max-w-5xl">
         <h1 className="text-center text-4xl font-bold text-blue-600 sm:text-5xl">Frequently Asked Questions</h1>
@@ -30,5 +32,6 @@ export default async function FaqPage() {
         </div>
       </div>
     </section>
+    </CmsPage>
   )
 }

@@ -225,6 +225,8 @@ function mapPage(doc: Record<string, unknown>): PageData {
     title: String(doc.title ?? ''),
     slug,
     excerpt: doc.excerpt ? String(doc.excerpt) : undefined,
+    comingSoon: Boolean(doc.comingSoon),
+    comingSoonMessage: doc.comingSoonMessage ? String(doc.comingSoonMessage) : undefined,
     layout,
     meta: mapMeta(doc.meta, pageSeo[slug], {
       title: String(doc.title ?? ''),

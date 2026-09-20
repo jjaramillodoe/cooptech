@@ -1,4 +1,11 @@
+import type { Metadata } from 'next'
+
 import { Button } from '@/components/ui/Button'
+
+export const metadata: Metadata = {
+  title: { absolute: 'Page not found | Coop Tech' },
+  robots: { index: false, follow: true },
+}
 
 export default function NotFound() {
   return (

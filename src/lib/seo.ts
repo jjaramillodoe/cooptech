@@ -10,13 +10,17 @@ export function toMetadata(seo: SeoMeta | undefined, path: string): Metadata {
   const title = seo?.title || fallback.title
   const description = seo?.description || fallback.description
   const image = seo?.image || fallback.image || '/og-image.png'
-  const url = path === '/' ? siteUrl : `${siteUrl}${path}`
+  const url = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
 
   return {
-    title: path === '/' ? { absolute: title } : title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: url,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
     openGraph: {
       title,
@@ -45,12 +49,21 @@ export function toMetadata(seo: SeoMeta | undefined, path: string): Metadata {
 
 export async function pageMetadata(slug: string, path: string): Promise<Metadata> {
   const page = await getPageBySlug(slug)
-  return toMetadata(page?.meta ?? pageSeo[slug], path)
+  const metadata = toMetadata(page?.meta ?? pageSeo[slug], path)
+  if (page?.comingSoon) {
+    return { ...metadata, robots: { index: false, follow: true } }
+  }
+  return metadata
 }
 
 export async function programMetadata(slug: string): Promise<Metadata> {
   const program = await getProgramBySlug(slug)
-  if (!program) return { title: 'Program' }
+  if (!program) {
+    return {
+      title: { absolute: 'Program not found | Coop Tech' },
+      robots: { index: false, follow: true },
+    }
+  }
   return toMetadata(
     program.meta ??
       programSeo[slug] ?? {

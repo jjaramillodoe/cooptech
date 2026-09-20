@@ -1,4 +1,5 @@
 import { programSeo } from '@/data/seo'
+import { programMedia } from '@/data/site-images'
 import type { Program } from '@/types/content'
 
 export const fallbackPrograms: Program[] = [
@@ -14,13 +15,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo['automotive-services'],
     duration: '2-year sequence',
     schedule: 'Morning 8:30–11:00 or Afternoon 12:20–2:50',
-    imageUrl:
-      'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia['automotive-services'].cover,
+    gallery: [...programMedia['automotive-services'].gallery],
     requirements: [
       'Ages 17–21 and enrolled in a NYC DOE high school, Pathways to Graduation, or post-graduate',
       'Interest in mechanical systems, diagnostics, and shop safety',
@@ -67,13 +63,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo.construction,
     duration: '1–2 years depending on pathway',
     schedule: 'Morning 8:30–11:00 or Afternoon 12:20–2:50',
-    imageUrl:
-      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia.construction.cover,
+    gallery: [...programMedia.construction.gallery],
     requirements: [
       'Ages 17–21 with shared-instruction or post-graduate status',
       'Comfort working in shop and job-site environments',
@@ -123,12 +114,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo.culinary,
     duration: '1–2 years',
     schedule: 'Morning 8:30–11:00 or Afternoon 12:20–2:50',
-    imageUrl:
-      'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia.culinary.cover,
+    gallery: [...programMedia.culinary.gallery],
     requirements: [
       'Ages 17–21 and eligible for NYC DOE CTE enrollment',
       'Interest in restaurant, catering, or institutional food service',
@@ -155,13 +142,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo.electrical,
     duration: '1–2 years',
     schedule: 'Morning 8:30–11:00 or Afternoon 12:20–2:50',
-    imageUrl:
-      'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1473341304170-971dccb5af1e?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia.electrical.cover,
+    gallery: [...programMedia.electrical.gallery],
     requirements: [
       'Ages 17–21 with shared-instruction or post-graduate status',
       'Comfort with applied math and shop safety procedures',
@@ -204,12 +186,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo['health-services'],
     duration: '1–2 years depending on pathway',
     schedule: 'Morning 8:30–11:00 or Afternoon 12:20–2:50',
-    imageUrl:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia['health-services'].cover,
+    gallery: [...programMedia['health-services'].gallery],
     requirements: [
       'Ages 17–21 and eligible for NYC DOE CTE enrollment',
       'Interest in patient care, medical records, or vision care',
@@ -247,13 +225,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo['information-technology'],
     duration: '1–2 years depending on pathway',
     schedule: 'Morning 8:30–11:00 or Afternoon 12:20–2:50',
-    imageUrl:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia['information-technology'].cover,
+    gallery: [...programMedia['information-technology'].gallery],
     requirements: [
       'Ages 17–21 with shared-instruction or post-graduate status',
       'Interest in design, networking, or digital media production',
@@ -299,12 +272,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo['unisex-styling'],
     duration: '1–2 years',
     schedule: 'Morning 8:30–11:00 or Afternoon 12:20–2:50',
-    imageUrl:
-      'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia['unisex-styling'].cover,
+    gallery: [...programMedia['unisex-styling'].gallery],
     requirements: [
       'Ages 17–21 and eligible for NYC DOE CTE enrollment',
       'Interest in barbering, natural hairstyling, or salon operations',
@@ -338,12 +307,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo['work-based-learning'],
     duration: 'Available to enrolled students',
     schedule: 'Arranged with the Office of Work-Based Learning',
-    imageUrl:
-      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia['work-based-learning'].cover,
+    gallery: [...programMedia['work-based-learning'].gallery],
     requirements: [
       'Enrolled Coop Tech student',
       'Internships are offered on an individual basis and are not guaranteed',
@@ -368,12 +333,8 @@ export const fallbackPrograms: Program[] = [
     meta: programSeo.osha,
     duration: '10-hour and 30-hour outreach courses',
     schedule: 'Offered as part of CTE shop sequences',
-    imageUrl:
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1600&q=80',
-    ],
+    imageUrl: programMedia.osha.cover,
+    gallery: [...programMedia.osha.gallery],
     requirements: ['Ages 17–21 and enrolled in a Coop Tech CTE program'],
     certifications: [
       'OSHA 10',

@@ -8,6 +8,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
 import { Providers } from '@/components/providers/Providers'
+import { SiteJsonLd } from '@/components/seo/SiteJsonLd'
 import { getBanner, getNavigation } from '@/lib/cms'
 import { siteUrl } from '@/lib/env'
 import { Analytics } from '@vercel/analytics/react'
@@ -42,14 +43,18 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
   manifest: '/site.webmanifest',
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
     siteName: 'Coop Tech',
-    title: 'Coop Tech | Learning that works',
+    title: 'Coop Tech | School of Cooperative Technical Education',
     description:
-      'Half-day career and technical education for New York City students ages 17–21.',
+      'Half-day CTE for NYC students ages 17–21. Learn a trade, earn industry certifications, and gain paid internship experience at Coop Tech.',
     images: [
       {
         url: '/og-image.png',
@@ -61,9 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Coop Tech | Learning that works',
+    title: 'Coop Tech | School of Cooperative Technical Education',
     description:
-      'Half-day career and technical education for New York City students ages 17–21.',
+      'Half-day CTE for NYC students ages 17–21. Learn a trade, earn industry certifications, and gain paid internship experience at Coop Tech.',
     images: ['/twitter-image.png'],
   },
 }
@@ -75,6 +80,7 @@ export default async function FrontendLayout({ children }: { children: React.Rea
     <html lang="en" className={sans.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="min-h-screen w-full bg-white font-sans antialiased" suppressHydrationWarning>
         <Analytics />
+        <SiteJsonLd />
         <Providers>
           <a href="#main-content" className="skip-link">
             Skip to main content

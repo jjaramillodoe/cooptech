@@ -1,6 +1,6 @@
 import 'dotenv/config'
 
-import { createReadStream } from 'node:fs'
+import { createReadStream, existsSync } from 'node:fs'
 import { readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { put } from '@vercel/blob'
@@ -57,14 +57,30 @@ async function main() {
     console.log(`uploaded ${item.pathname}`)
   }
 
+  const content: Record<string, string> = {}
+  const contentFiles = (await readdir(brandDir))
+    .filter((file) => file.endsWith('.webp'))
+    .sort()
+
+  for (const file of contentFiles) {
+    const filePath = path.join(brandDir, file)
+    if (!existsSync(filePath)) continue
+    const key = path.parse(file).name
+    const url = await upload(`content/${file}`, filePath, 'image/webp', access)
+    content[key] = url
+    console.log(`uploaded content/${file}`)
+  }
+
   const useOnSite = access === 'public'
   const output = `export const blobAssets: {
   partners: Record<string, string>
   brand: Record<string, string>
+  content: Record<string, string>
 } = ${JSON.stringify(
     {
       partners: useOnSite ? partners : {},
       brand: useOnSite ? brand : {},
+      content: useOnSite ? content : {},
     },
     null,
     2,

@@ -1,5 +1,6 @@
 import { fallbackFaq } from '@/data/faq'
 import { pageSeo } from '@/data/seo'
+import { programMedia, siteImages } from '@/data/site-images'
 import type { PageData } from '@/types/content'
 
 export const fallbackPages: PageData[] = [
@@ -19,8 +20,7 @@ export const fallbackPages: PageData[] = [
         primaryHref: '/programs',
         secondaryLabel: 'How to apply',
         secondaryHref: '/admissions',
-        imageUrl:
-          'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=2000&q=80',
+        imageUrl: siteImages.main,
       },
       {
         blockType: 'imageTextGrid',
@@ -31,64 +31,55 @@ export const fallbackPages: PageData[] = [
             title: 'Automotive Services',
             body: 'Learn automotive repair, maintenance, and diagnostic techniques using modern technology.',
             href: '/programs/automotive-services',
-            imageUrl:
-              'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia['automotive-services'].cover,
           },
           {
             title: 'Construction and Building Skills',
             body: 'Master essential construction skills and building techniques for modern infrastructure.',
             href: '/programs/construction',
-            imageUrl:
-              'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia.construction.cover,
           },
           {
             title: 'Culinary Arts',
             body: 'Develop professional culinary skills and learn food service management.',
             href: '/programs/culinary',
-            imageUrl:
-              'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia.culinary.cover,
           },
           {
             title: 'Electrical',
             body: 'Train in electrical systems installation, maintenance, and troubleshooting.',
             href: '/programs/electrical',
-            imageUrl:
-              'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia.electrical.cover,
           },
           {
             title: 'Health Services',
             body: 'Prepare for a career in healthcare with hands-on medical training.',
             href: '/programs/health-services',
-            imageUrl:
-              'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia['health-services'].cover,
           },
           {
             title: 'Information Technology',
             body: 'Learn cutting-edge IT skills and prepare for industry certifications.',
             href: '/programs/information-technology',
-            imageUrl:
-              'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia['information-technology'].cover,
           },
           {
             title: 'Unisex Styling',
             body: 'Master professional hair styling techniques and salon management skills.',
             href: '/programs/unisex-styling',
-            imageUrl:
-              'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia['unisex-styling'].cover,
           },
           {
             title: 'Work-Based Learning',
             body: 'Connect classroom training to real jobs through job shadowing, internships, and pre-apprenticeship opportunities.',
             href: '/programs/work-based-learning',
-            imageUrl:
-              'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia['work-based-learning'].cover,
           },
           {
             title: 'Occupational Safety and Health Administration (OSHA)',
             body: 'Earn OSHA 10, OSHA 30, and NYC Department of Buildings SST credentials for construction and general industry safety.',
             href: '/programs/osha',
-            imageUrl:
-              'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia.osha.cover,
           },
         ],
       },
@@ -242,9 +233,8 @@ export const fallbackPages: PageData[] = [
       {
         blockType: 'article',
         heading: 'About Coop',
-        imageUrl:
-          'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=2000&q=80',
-        imageAlt: 'Courtyard outside a Coop Tech brick campus building',
+        imageUrl: siteImages.about,
+        imageAlt: 'Students and staff at Coop Tech',
         documentLabel: 'Download About Coop PDF',
         sections: [
           {
@@ -316,8 +306,7 @@ export const fallbackPages: PageData[] = [
             rating: '5',
             quote:
               'I stay at my home school for academics and come here for the shop. The tools and the teachers make it feel like a real garage.',
-            imageUrl:
-              'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia['automotive-services'].cover,
             imageAlt: 'Student working in an automotive shop',
           },
           {
@@ -335,8 +324,7 @@ export const fallbackPages: PageData[] = [
             rating: '4.5',
             quote:
               'The internship matched what we practiced in the shop. OSHA and job-readiness made the first day on site less intimidating.',
-            imageUrl:
-              'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80',
+            imageUrl: programMedia.construction.cover,
             imageAlt: 'Construction training site',
           },
         ],
@@ -369,9 +357,8 @@ export const fallbackPages: PageData[] = [
       {
         blockType: 'article',
         heading: "Principal's Message",
-        imageUrl:
-          'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=2000&q=80',
-        imageAlt: 'Courtyard outside the Coop Tech campus',
+        imageUrl: siteImages.principal,
+        imageAlt: 'Coop Tech campus',
         documentLabel: "Download Principal's Message PDF",
         sections: [
           {

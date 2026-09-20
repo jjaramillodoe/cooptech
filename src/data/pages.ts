@@ -1,6 +1,7 @@
 import { fallbackFaq } from '@/data/faq'
 import { pageSeo } from '@/data/seo'
 import { programMedia, siteImages } from '@/data/site-images'
+import { homeTestimonials } from '@/data/testimonials'
 import type { PageData } from '@/types/content'
 
 export const fallbackPages: PageData[] = [
@@ -83,6 +84,7 @@ export const fallbackPages: PageData[] = [
           },
         ],
       },
+      homeTestimonials,
       {
         blockType: 'ctaBanner',
         heading: 'Our students become independent, self-supporting, lifelong learners.',
@@ -291,44 +293,7 @@ export const fallbackPages: PageData[] = [
         attribution: 'Coop Tech',
         role: "Principal's message",
       },
-      {
-        blockType: 'testimonials',
-        eyebrow: 'Student voices',
-        heading: 'What students say about Coop Tech',
-        intro: 'Hands-on shops, industry credentials, and a half-day schedule that works with a home school.',
-        buttonLabel: 'See programs',
-        buttonHref: '/programs',
-        items: [
-          {
-            authorName: 'Shared-instruction student',
-            authorRole: 'Automotive Services',
-            authorCompany: 'Coop Tech',
-            rating: '5',
-            quote:
-              'I stay at my home school for academics and come here for the shop. The tools and the teachers make it feel like a real garage.',
-            imageUrl: programMedia['automotive-services'].cover,
-            imageAlt: 'Student working in an automotive shop',
-          },
-          {
-            authorName: 'Post-graduate student',
-            authorRole: 'Health Services',
-            authorCompany: 'Coop Tech',
-            rating: '5',
-            quote:
-              'After I earned my diploma I still wanted a trade. The clinic labs and certifications gave me a path into healthcare.',
-          },
-          {
-            authorName: 'Work-Based Learning student',
-            authorRole: 'Construction',
-            authorCompany: 'Coop Tech',
-            rating: '4.5',
-            quote:
-              'The internship matched what we practiced in the shop. OSHA and job-readiness made the first day on site less intimidating.',
-            imageUrl: programMedia.construction.cover,
-            imageAlt: 'Construction training site',
-          },
-        ],
-      },
+      homeTestimonials,
       {
         blockType: 'logoStrip',
         eyebrow: 'Partnerships',

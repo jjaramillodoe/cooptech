@@ -9,9 +9,17 @@ import { CmsPage } from '@/components/pages/CmsPage'
 import { homeTestimonials } from '@/data/testimonials'
 import { getPageBySlug, getPrograms } from '@/lib/cms'
 import { pageMetadata } from '@/lib/seo'
+import type { TestimonialsBlockData } from '@/types/content'
 
 export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata('home', '/')
+}
+
+function testimonialsFromPage(page: Awaited<ReturnType<typeof getPageBySlug>>): TestimonialsBlockData {
+  const fromCms = page?.layout.find(
+    (block): block is TestimonialsBlockData => block.blockType === 'testimonials',
+  )
+  return fromCms?.items.length ? fromCms : homeTestimonials
 }
 
 export default async function HomePage() {
@@ -22,7 +30,7 @@ export default async function HomePage() {
       <HomeHero />
       <Mission />
       <ProgramDirectory programs={programs} />
-      <TestimonialsBlock block={homeTestimonials} />
+      <TestimonialsBlock block={testimonialsFromPage(page)} />
       <Partners />
     </CmsPage>
   )

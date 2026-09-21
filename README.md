@@ -82,6 +82,8 @@ This upserts pages, programs, staff, announcements, and navigation from `src/dat
 4. Deploy, open `/admin`, create the first user, then run seed against production Mongo if the CMS is empty.
 5. Set `TWO_FACTOR_ENCRYPTION_KEY` in Vercel. After the first password login, CMS users are sent to **Account** to scan a QR code in an authenticator app. Later logins require that 6-digit code.
 
+Contact form email is sent by Power Automate, not by the site. The flow steps are in [docs/power-automate-contact-emails.md](docs/power-automate-contact-emails.md).
+
 ## Playwright capture
 
 ```bash

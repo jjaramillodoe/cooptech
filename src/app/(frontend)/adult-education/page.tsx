@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { CmsPage } from '@/components/pages/CmsPage'
-import { Button } from '@/components/ui/Button'
+import { ApplyButton, Button } from '@/components/ui/Button'
 import { getPageBySlug } from '@/lib/cms'
 import { pageMetadata } from '@/lib/seo'
 
@@ -28,9 +28,7 @@ export default async function AdultEducationPage() {
           to confirm eligibility and campus availability.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button href="/admissions" variant="primary">
-            Apply Now
-          </Button>
+          <ApplyButton>Apply Now</ApplyButton>
           <Button href="mailto:coopadmissions@schools.nyc.gov" variant="ghost">
             Email admissions
           </Button>

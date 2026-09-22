@@ -8,7 +8,7 @@ import classNames from 'classnames'
 
 import { Logo } from '@/components/brand/Logo'
 import { GoogleTranslate } from '@/components/layout/GoogleTranslate'
-import { Button } from '@/components/ui/Button'
+import { ApplyButton } from '@/components/ui/Button'
 import type { NavItem } from '@/types/content'
 
 type HeaderProps = {
@@ -132,9 +132,7 @@ export function Header({ items }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button href="/admissions" variant="primary" className="hidden sm:inline-flex">
-            Apply Now
-          </Button>
+          <ApplyButton className="hidden sm:inline-flex">Apply Now</ApplyButton>
           <button
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-fog-100 text-navy-900 lg:hidden"
@@ -205,9 +203,7 @@ export function Header({ items }: HeaderProps) {
                 )
               })}
             </ul>
-            <Button href="/admissions" variant="primary" className="mt-6 w-full">
-              Apply Now
-            </Button>
+            <ApplyButton className="mt-6 w-full">Apply Now</ApplyButton>
           </div>
         </div>
       ) : null}

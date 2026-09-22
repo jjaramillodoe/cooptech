@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 
 import { fallbackAnnouncements } from '@/data/announcements'
+import { ADMISSIONS_PORTAL_URL, isAdmissionOpen, type AdmissionWindow, type AdmissionsPortal } from '@/lib/admissions'
 import { fallbackBanner } from '@/data/banner'
 import { fallbackNavigation } from '@/data/navigation'
 import { fallbackPages } from '@/data/pages'
@@ -602,6 +603,38 @@ function isWithinWindow(startsAt?: string | null, endsAt?: string | null) {
   if (startsAt && new Date(startsAt).getTime() > now) return false
   if (endsAt && new Date(endsAt).getTime() < now) return false
   return true
+}
+
+export async function getAdmissionsPortal(): Promise<AdmissionsPortal> {
+  const closed: AdmissionsPortal = { open: false, portalUrl: ADMISSIONS_PORTAL_URL }
+  try {
+    const payload = await getCms()
+    const doc = await payload.findGlobal({
+      slug: 'admissions',
+      depth: 0,
+    })
+    const record = doc as {
+      portalUrl?: string | null
+      windowOne?: { opensAt?: unknown; closesAt?: unknown } | null
+      windowTwo?: { opensAt?: unknown; closesAt?: unknown } | null
+    }
+    const portalUrl = record.portalUrl?.trim() || ADMISSIONS_PORTAL_URL
+    const iso = (value: unknown) => {
+      if (!value) return null
+      const date = new Date(value as string)
+      return Number.isNaN(date.getTime()) ? null : date.toISOString()
+    }
+    const windowFrom = (group?: { opensAt?: unknown; closesAt?: unknown } | null): AdmissionWindow => ({
+      opensAt: iso(group?.opensAt),
+      closesAt: iso(group?.closesAt),
+    })
+    return {
+      open: isAdmissionOpen([windowFrom(record.windowOne), windowFrom(record.windowTwo)]),
+      portalUrl,
+    }
+  } catch {
+    return closed
+  }
 }
 
 export async function getBanner(): Promise<BannerData | null> {

@@ -9,7 +9,8 @@ import { Header } from '@/components/layout/Header'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
 import { Providers } from '@/components/providers/Providers'
 import { SiteJsonLd } from '@/components/seo/SiteJsonLd'
-import { getBanner, getNavigation } from '@/lib/cms'
+import { AdmissionsProvider } from '@/components/admissions/AdmissionsProvider'
+import { getAdmissionsPortal, getBanner, getNavigation } from '@/lib/cms'
 import { siteUrl } from '@/lib/env'
 import { Analytics } from '@vercel/analytics/react'
 
@@ -74,7 +75,11 @@ export const metadata: Metadata = {
 }
 
 export default async function FrontendLayout({ children }: { children: React.ReactNode }) {
-  const [navigation, banner] = await Promise.all([getNavigation(), getBanner()])
+  const [navigation, banner, admissions] = await Promise.all([
+    getNavigation(),
+    getBanner(),
+    getAdmissionsPortal(),
+  ])
 
   return (
     <html lang="en" className={sans.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
@@ -82,16 +87,18 @@ export default async function FrontendLayout({ children }: { children: React.Rea
         <Analytics />
         <SiteJsonLd />
         <Providers>
-          <a href="#main-content" className="skip-link">
-            Skip to main content
-          </a>
-          <Header items={navigation.header} />
-          <main id="main-content" className="w-full">
-            {banner ? <AnnouncementBar banner={banner} /> : null}
-            {children}
-          </main>
-          <Footer columns={navigation.footer} />
-          <ScrollToTop />
+          <AdmissionsProvider open={admissions.open} portalUrl={admissions.portalUrl}>
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
+            <Header items={navigation.header} />
+            <main id="main-content" className="w-full">
+              {banner ? <AnnouncementBar banner={banner} /> : null}
+              {children}
+            </main>
+            <Footer columns={navigation.footer} />
+            <ScrollToTop />
+          </AdmissionsProvider>
           <Script
             src="https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js"
             strategy="afterInteractive"

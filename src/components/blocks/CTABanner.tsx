@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/Button'
+import { ApplyButton, Button } from '@/components/ui/Button'
+import { ADMISSIONS_PORTAL_URL, isPortalHref } from '@/lib/admissions'
 import type { CTABannerBlockData } from '@/types/content'
 
 export function CTABanner({ block }: { block: CTABannerBlockData }) {
@@ -10,9 +11,13 @@ export function CTABanner({ block }: { block: CTABannerBlockData }) {
           {block.body ? <p className="mt-3 text-base leading-7 text-ink-700">{block.body}</p> : null}
         </div>
         {block.buttonHref && block.buttonLabel ? (
-          <Button href={block.buttonHref} variant="primary" className="shrink-0">
-            {block.buttonLabel}
-          </Button>
+          block.buttonHref === '/admissions' || isPortalHref(block.buttonHref, ADMISSIONS_PORTAL_URL) ? (
+            <ApplyButton className="shrink-0">{block.buttonLabel}</ApplyButton>
+          ) : (
+            <Button href={block.buttonHref} variant="primary" className="shrink-0">
+              {block.buttonLabel}
+            </Button>
+          )
         ) : null}
       </div>
     </section>

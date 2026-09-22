@@ -4,7 +4,7 @@ import { Award, Calendar, Clock, MapPin } from 'lucide-react'
 import { ProgramCarousel } from '@/components/programs/ProgramCarousel'
 import { ProgramCopy } from '@/components/programs/ProgramCopy'
 import { ProgramIconCard } from '@/components/home/ProgramIconCard'
-import { Button } from '@/components/ui/Button'
+import { ApplyButton, Button } from '@/components/ui/Button'
 import { programIcons } from '@/lib/program-icons'
 import type { Program } from '@/types/content'
 
@@ -187,9 +187,7 @@ export function ProgramDetail({
             ) : null}
 
             <div className="mt-6 flex flex-col gap-3 border-t border-ink-900/10 pt-6">
-              <Button href="/admissions" variant="primary">
-                Apply now
-              </Button>
+              <ApplyButton>Apply now</ApplyButton>
               <Button href="/programs" variant="ghost">
                 All programs
               </Button>
@@ -227,9 +225,7 @@ export function ProgramDetail({
               session at Coop Tech.
             </p>
           </div>
-          <Button href="/admissions" variant="primary" className="shrink-0">
-            Start your application
-          </Button>
+          <ApplyButton className="shrink-0">Start your application</ApplyButton>
         </div>
       </section>
     </article>

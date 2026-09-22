@@ -12,6 +12,7 @@ import { Pages } from './collections/Pages'
 import { Programs } from './collections/Programs'
 import { Staff } from './collections/Staff'
 import { Users } from './collections/Users'
+import { Admissions } from './globals/Admissions'
 import { Banner } from './globals/Banner'
 import { Navigation } from './globals/Navigation'
 import { blobStorage } from './plugins/blob'
@@ -33,7 +34,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Pages, Programs, Announcements, Staff, ContactSubmissions],
-  globals: [Navigation, Banner],
+  globals: [Navigation, Banner, Admissions],
   plugins: [seo, importExport, blobStorage, twoFactor],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

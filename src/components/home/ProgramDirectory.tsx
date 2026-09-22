@@ -26,6 +26,7 @@ export function ProgramDirectory({ programs }: { programs: Program[] }) {
                 body={program.summary}
                 href={`/programs/${program.slug}`}
                 icon={programIcons[program.category]}
+                imageUrl={program.imageUrl}
               />
             </div>
           ))}

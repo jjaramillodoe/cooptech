@@ -19,6 +19,7 @@
     "seo:sync": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/sync-seo.ts",
     "images:sync": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/sync-images.ts",
     "testimonials:sync": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/sync-testimonials.ts",
+    "contact:normalize": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/normalize-contact-submissions.ts",
     "capture": "tsx scripts/capture-site.ts",
     "brand:assets": "tsx scripts/generate-brand-assets.ts",
     "blob:upload": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/upload-blob-images.ts",

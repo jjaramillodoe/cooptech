@@ -26,7 +26,8 @@ export const ContactSubmissions: CollectionConfig = {
   },
   defaultSort: '-createdAt',
   access: {
-    create: () => true,
+    // Public submissions go through the contact server action (Turnstile + validation).
+    create: ({ req: { user } }) => Boolean(user),
     read: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),

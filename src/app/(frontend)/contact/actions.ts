@@ -1,5 +1,6 @@
 'use server'
 
+import { headers } from 'next/headers'
 import { getPayload } from 'payload'
 
 import {
@@ -8,7 +9,9 @@ import {
   inquiryRoles,
   inquiryTypes,
   preferredContacts,
+  TURNSTILE_CONTACT_ACTION,
 } from '@/data/contact-form'
+import { verifyTurnstile } from '@/lib/turnstile'
 
 function value(formData: FormData, key: string) {
   return String(formData.get(key) || '').trim()
@@ -21,6 +24,20 @@ function oneOf<T extends string>(input: string, allowed: readonly T[]): T | '' {
 export async function submitInquiry(formData: FormData) {
   if (value(formData, 'company')) {
     return { ok: true as const }
+  }
+
+  const requestHeaders = await headers()
+  const remoteIp =
+    requestHeaders.get('cf-connecting-ip') ||
+    requestHeaders.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    undefined
+  const human = await verifyTurnstile({
+    token: value(formData, 'cf-turnstile-response'),
+    action: TURNSTILE_CONTACT_ACTION,
+    remoteIp,
+  })
+  if (!human) {
+    throw new Error('Verification failed')
   }
 
   const name = value(formData, 'name')

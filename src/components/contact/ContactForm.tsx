@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/Button'
+import { TurnstileWidget, type TurnstileHandle } from '@/components/contact/TurnstileWidget'
 import { submitInquiry } from '@/app/(frontend)/contact/actions'
 import {
   inquiryCampuses,
@@ -10,6 +11,7 @@ import {
   inquiryRoles,
   inquiryTypes,
   preferredContacts,
+  TURNSTILE_CONTACT_ACTION,
 } from '@/data/contact-form'
 
 const fieldClass =
@@ -43,10 +45,12 @@ function SelectField({
   )
 }
 
-export function ContactForm() {
+export function ContactForm({ turnstileSiteKey }: { turnstileSiteKey: string }) {
   const formRef = useRef<HTMLFormElement>(null)
+  const turnstileRef = useRef<TurnstileHandle>(null)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [pending, setPending] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   async function onSubmit(formData: FormData) {
     setPending(true)
@@ -58,6 +62,8 @@ export function ContactForm() {
     } catch {
       setStatus('error')
     } finally {
+      // Turnstile tokens are single-use; get a fresh one for the next attempt.
+      turnstileRef.current?.reset()
       setPending(false)
     }
   }
@@ -118,8 +124,14 @@ export function ContactForm() {
         Message
         <textarea required name="message" rows={5} className={fieldClass} />
       </label>
+      <TurnstileWidget
+        ref={turnstileRef}
+        siteKey={turnstileSiteKey}
+        action={TURNSTILE_CONTACT_ACTION}
+        onTokenChange={setTurnstileToken}
+      />
       <div className="mt-5 flex items-center gap-3">
-        <Button type="submit" variant="primary" disabled={pending}>
+        <Button type="submit" variant="primary" disabled={pending || !turnstileToken}>
           {pending ? 'Sending…' : 'Send message'}
         </Button>
         {status === 'success' ? (

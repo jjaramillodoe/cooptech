@@ -38,3 +38,6 @@ export const admissionsInbox = 'coopadmissions@schools.nyc.gov'
 export function inquirySubject(inquiryType: string, name: string) {
   return `Coop Tech inquiry: ${inquiryType || 'General'} — ${name}`
 }
+
+/** Turnstile action name for the contact form; checked server-side in siteverify. */
+export const TURNSTILE_CONTACT_ACTION = 'contact'

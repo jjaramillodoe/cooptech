@@ -15,6 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ContactPage() {
   const page = await getPageBySlug('contact')
   const mapboxToken = process.env.MAPBOX_TOKEN || process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''
+  const turnstileSiteKey = process.env.TURNSTILE_SITE_KEY || process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''
 
   return (
     <CmsPage page={page}>
@@ -30,7 +31,7 @@ export default async function ContactPage() {
             . Use this form for general campus and program inquiries.
           </p>
           <div className="mt-6">
-            <ContactForm />
+            <ContactForm turnstileSiteKey={turnstileSiteKey} />
           </div>
         </ContactLocations>
       </section>

@@ -49,33 +49,44 @@ Add an **HTTP** action.
 Add **Parse JSON** after the HTTP action.
 
 - Content: `Body` from the HTTP action.
-- Schema: use **Generate from sample** with this sample.
+- Schema: paste the schema below. Do not use **Generate from sample**: it marks every field as required. Payload leaves out empty optional fields such as `phone`, `studentName`, `homeSchool`, `program` and `campus`, so a generated schema fails with `ValidationFailed`.
 
 ```json
 {
-  "docs": [
-    {
-      "id": "66f0abc1234567890abcdef0",
-      "name": "Jane Doe",
-      "email": "jane@example.com",
-      "phone": "212-555-0100",
-      "role": "Parent or guardian",
-      "inquiryType": "Admissions",
-      "preferredContact": "Email",
-      "studentName": "Alex Doe",
-      "homeSchool": "Example High School",
-      "program": "Automotive Services",
-      "campus": "Coop Tech Main Campus",
-      "message": "We would like to apply for the fall.",
-      "subject": "Coop Tech inquiry: Admissions — Jane Doe",
-      "staffEmail": "coopadmissions@schools.nyc.gov",
-      "emailsSent": false,
-      "status": "new",
-      "createdAt": "2026-09-21T18:00:00.000Z"
-    }
-  ]
+  "type": "object",
+  "properties": {
+    "docs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": ["string", "null"] },
+          "role": { "type": "string" },
+          "inquiryType": { "type": "string" },
+          "preferredContact": { "type": ["string", "null"] },
+          "studentName": { "type": ["string", "null"] },
+          "homeSchool": { "type": ["string", "null"] },
+          "program": { "type": ["string", "null"] },
+          "campus": { "type": ["string", "null"] },
+          "message": { "type": "string" },
+          "subject": { "type": "string" },
+          "staffEmail": { "type": "string" },
+          "emailsSent": { "type": ["boolean", "null"] },
+          "status": { "type": ["string", "null"] },
+          "createdAt": { "type": "string" }
+        },
+        "required": ["id", "name", "email", "role", "inquiryType", "message", "subject", "staffEmail"]
+      }
+    },
+    "hasNextPage": { "type": "boolean" }
+  }
 }
 ```
+
+In email bodies, read optional fields with `?[...]`, for example `@{items('Apply_to_each')?['studentName']}`. A missing field then prints as blank and doesn't fail the run.
 
 ## 4. Send both emails for each record
 

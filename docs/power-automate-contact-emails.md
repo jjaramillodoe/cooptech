@@ -30,7 +30,7 @@ Replace `YOUR_API_KEY` with the key from the user screen. The word `users` is th
 1. In [Power Automate](https://make.powerautomate.com), choose **Create** → **Scheduled cloud flow**.
 2. Name it `Coop Tech contact emails`.
 3. Set the recurrence to every **5 minutes**.
-4. Open the flow settings and set **Concurrency control** to **On** with a degree of parallelism of **1**. That stops two runs from emailing the same inquiry.
+4. Open the **Recurrence** trigger → **...** → **Settings**, and set **Concurrency control** to **On** with a degree of parallelism of **1**. If one run takes longer than 5 minutes, the next waits instead of emailing the same inquiries again.
 
 Use the live site URL with no trailing slash, for example `https://www.co-optech.org`. Locally that is `http://localhost:3000`.
 
@@ -46,7 +46,40 @@ Add an **HTTP** action.
 
 `emailsSent` is `false` until this flow marks the record done. `staffEmail` on each record is `coopadmissions@schools.nyc.gov`. `subject` is already filled, for example `Coop Tech inquiry: Admissions — Jane Doe`.
 
-Add **Parse JSON** after the HTTP action.
+### Stop when there is nothing new
+
+Most runs find no new inquiries. Add a **Condition** right after the HTTP action, so those runs stop early and are easy to spot in run history.
+
+| Setting | Value |
+| --- | --- |
+| Left value (expression) | `length(body('HTTP')?['docs'])` |
+| Operator | is greater than |
+| Right value | `0` |
+
+Use your GET action's name in place of `'HTTP'` if you renamed it. Spaces in the name become underscores, for example `body('Get_unsent_inquiries')`.
+
+- **False:** add **Terminate** with status **Succeeded**. Do not use Failed, or every quiet run shows as an error.
+- **True:** put the rest of the flow here: Parse JSON, then Apply to each (steps below).
+
+The flow then looks like this:
+
+```text
+Recurrence (every 5 min, concurrency 1)
+└─ HTTP: GET unsent inquiries
+   └─ Condition: length(docs) > 0
+      ├─ True
+      │  ├─ Parse JSON
+      │  └─ Apply to each docs
+      │     ├─ Email 1: confirmation to visitor
+      │     ├─ Email 2: inquiry to admissions
+      │     └─ HTTP: PATCH emailsSent = true
+      └─ False
+         └─ Terminate (Succeeded)
+```
+
+### Parse the response
+
+In the **True** branch, add **Parse JSON**.
 
 - Content: `Body` from the HTTP action.
 - Schema: paste the schema below. Do not use **Generate from sample**: it marks every field as required. Payload leaves out empty optional fields such as `phone`, `studentName`, `homeSchool`, `program` and `campus`, so a generated schema fails with `ValidationFailed`.
@@ -90,7 +123,7 @@ In email bodies, read optional fields with `?[...]`, for example `@{items('Apply
 
 ## 4. Send both emails for each record
 
-Add **Apply to each**. Select `docs` from the Parse JSON action.
+In the **True** branch, after Parse JSON, add **Apply to each**. Select `docs` from the Parse JSON action. Leave its own concurrency setting off, so records are handled one at a time.
 
 Inside the loop, add two **Send an email from a shared mailbox (V2)** actions from the Office 365 Outlook connector. Connect them with the noreply mailbox, and give that mailbox **Send As** permission. Use the same noreply mailbox for both messages.
 
@@ -148,9 +181,11 @@ Still inside the loop, after both email actions, add an **HTTP** action.
 | Setting | Value |
 | --- | --- |
 | Method | PATCH |
-| URI | `https://www.co-optech.org/api/contact-submissions/` plus the current item `id` |
+| URI (expression) | `concat('https://www.co-optech.org/api/contact-submissions/', item()?['id'])` |
 | Headers | `Authorization` = `users API-Key YOUR_API_KEY` and `Content-Type` = `application/json` |
 | Body | `{ "emailsSent": true }` |
+
+The method must be **PATCH**. POST or PUT to this URL returns 404 `Route not found`. `true` in the body is a boolean, so do not put it in quotes.
 
 Open the **...** menu on this PATCH action, choose **Configure run after**, and leave only **is successful** checked for both email actions. If either email fails, `emailsSent` stays false and the next run tries again.
 

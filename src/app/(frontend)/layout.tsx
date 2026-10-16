@@ -74,6 +74,10 @@ export const metadata: Metadata = {
   },
 }
 
+// Re-render cached pages at most once a minute, so scheduled banners and
+// admissions windows switch on time. CMS edits also revalidate immediately.
+export const revalidate = 60
+
 export default async function FrontendLayout({ children }: { children: React.ReactNode }) {
   const [navigation, banner, admissions] = await Promise.all([
     getNavigation(),

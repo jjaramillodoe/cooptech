@@ -1,7 +1,13 @@
 import type { GlobalConfig } from 'payload'
 
+import { revalidateSite } from '../lib/revalidate'
+import { endsAfterStart } from '../lib/schedule'
+
 export const Banner: GlobalConfig = {
   slug: 'banner',
+  hooks: {
+    afterChange: [revalidateSite],
+  },
   label: 'Site Banner',
   admin: {
     description: 'The rounded alert under the header. Update this whenever admissions or school status changes.',
@@ -84,6 +90,7 @@ export const Banner: GlobalConfig = {
         {
           name: 'endsAt',
           type: 'date',
+          validate: endsAfterStart,
           admin: {
             date: { pickerAppearance: 'dayAndTime' },
             width: '50%',

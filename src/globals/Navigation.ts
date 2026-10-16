@@ -1,5 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
+import { revalidateSite } from '../lib/revalidate'
+
 const navLinkFields = [
   {
     name: 'label',
@@ -15,6 +17,9 @@ const navLinkFields = [
 
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
+  hooks: {
+    afterChange: [revalidateSite],
+  },
   access: {
     read: () => true,
   },

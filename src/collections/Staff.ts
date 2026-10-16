@@ -1,7 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
+import { revalidateSite } from '../lib/revalidate'
+
 export const Staff: CollectionConfig = {
   slug: 'staff',
+  hooks: {
+    afterChange: [revalidateSite],
+    afterDelete: [revalidateSite],
+  },
   admin: {
     useAsTitle: 'lastName',
     defaultColumns: ['lastName', 'firstName', 'role', 'category'],

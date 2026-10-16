@@ -1,5 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
+import { revalidateSite } from '../lib/revalidate'
+
 const windowFields = [
   {
     name: 'opensAt',
@@ -23,6 +25,9 @@ const windowFields = [
 
 export const Admissions: GlobalConfig = {
   slug: 'admissions',
+  hooks: {
+    afterChange: [revalidateSite],
+  },
   label: 'Admissions portal',
   admin: {
     description:

@@ -17,6 +17,8 @@ import { TextSection } from '../blocks/TextSection'
 import { Video } from '../blocks/Video'
 import { blockPreview } from '../lib/block-previews'
 
+import { revalidateSite } from '../lib/revalidate'
+
 function withPreview(block: Block): Block {
   const url = blockPreview[block.slug as keyof typeof blockPreview]
   if (!url) return block
@@ -30,6 +32,10 @@ function withPreview(block: Block): Block {
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  hooks: {
+    afterChange: [revalidateSite],
+    afterDelete: [revalidateSite],
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'comingSoon', 'updatedAt'],

@@ -1,7 +1,14 @@
 import type { CollectionConfig } from 'payload'
 
+import { revalidateSite } from '../lib/revalidate'
+import { endsAfterStart } from '../lib/schedule'
+
 export const Announcements: CollectionConfig = {
   slug: 'announcements',
+  hooks: {
+    afterChange: [revalidateSite],
+    afterDelete: [revalidateSite],
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'kind', 'active', 'startsAt'],
@@ -52,7 +59,8 @@ export const Announcements: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
       admin: {
-        description: 'Show this announcement in the site-wide top banner.',
+        description:
+          'Show this announcement in the site-wide banner between Starts At and Ends At. It replaces the Site Banner global while it is live.',
       },
     },
     {
@@ -65,6 +73,7 @@ export const Announcements: CollectionConfig = {
     {
       name: 'endsAt',
       type: 'date',
+      validate: endsAfterStart,
       admin: {
         date: { pickerAppearance: 'dayAndTime' },
       },

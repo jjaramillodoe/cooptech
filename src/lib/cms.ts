@@ -581,16 +581,18 @@ export async function getAnnouncements(): Promise<Announcement[]> {
       sort: '-startsAt',
     })
     if (result.docs.length > 0) {
-      return result.docs.map((doc) => ({
-        id: String(doc.id),
-        title: String(doc.title),
-        kind: doc.kind as Announcement['kind'],
-        body: String(doc.body),
-        href: doc.href ? String(doc.href) : undefined,
-        linkLabel: doc.linkLabel ? String(doc.linkLabel) : undefined,
-        active: Boolean(doc.active),
-        pinToBanner: Boolean(doc.pinToBanner),
-      }))
+      return result.docs
+        .filter((doc) => isWithinWindow(doc.startsAt, doc.endsAt))
+        .map((doc) => ({
+          id: String(doc.id),
+          title: String(doc.title),
+          kind: doc.kind as Announcement['kind'],
+          body: String(doc.body),
+          href: doc.href ? String(doc.href) : undefined,
+          linkLabel: doc.linkLabel ? String(doc.linkLabel) : undefined,
+          active: Boolean(doc.active),
+          pinToBanner: Boolean(doc.pinToBanner),
+        }))
     }
   } catch {
     // CMS unavailable
@@ -637,9 +639,41 @@ export async function getAdmissionsPortal(): Promise<AdmissionsPortal> {
   }
 }
 
+const announcementBannerStyle: Record<Announcement['kind'], { tone: BannerTone; icon: BannerIcon }> = {
+  alert: { tone: 'info', icon: 'megaphone' },
+  event: { tone: 'info', icon: 'calendar' },
+  calendar: { tone: 'info', icon: 'calendar' },
+}
+
+/** A pinned, active announcement inside its Starts At / Ends At window wins over the Site Banner global. */
+async function getPinnedAnnouncementBanner(payload: Awaited<ReturnType<typeof getCms>>) {
+  const result = await payload.find({
+    collection: 'announcements',
+    where: { and: [{ active: { equals: true } }, { pinToBanner: { equals: true } }] },
+    sort: '-startsAt',
+    limit: 20,
+    depth: 0,
+  })
+  const doc = result.docs.find((item) => isWithinWindow(item.startsAt, item.endsAt))
+  if (!doc) return null
+  const style = announcementBannerStyle[doc.kind as Announcement['kind']] ?? announcementBannerStyle.alert
+  return {
+    active: true,
+    ...style,
+    heading: String(doc.title),
+    body: String(doc.body),
+    linkHref: doc.href ? String(doc.href) : undefined,
+    linkLabel: doc.href ? String(doc.linkLabel || 'Learn more') : undefined,
+    startsAt: doc.startsAt ? String(doc.startsAt) : undefined,
+    endsAt: doc.endsAt ? String(doc.endsAt) : undefined,
+  } satisfies BannerData
+}
+
 export async function getBanner(): Promise<BannerData | null> {
   try {
     const payload = await getCms()
+    const pinned = await getPinnedAnnouncementBanner(payload)
+    if (pinned) return pinned
     const banner = await payload.findGlobal({
       slug: 'banner',
       depth: 0,

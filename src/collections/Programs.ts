@@ -1,7 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
+import { revalidateSite } from '../lib/revalidate'
+
 export const Programs: CollectionConfig = {
   slug: 'programs',
+  hooks: {
+    afterChange: [revalidateSite],
+    afterDelete: [revalidateSite],
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'duration', 'updatedAt'],
